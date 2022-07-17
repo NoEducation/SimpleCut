@@ -17,8 +17,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCut.Worker", "SimpleC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCut.IntegrationTests", "SimpleCut.IntegrationTests\SimpleCut.IntegrationTests.csproj", "{FCCC39C5-372F-443F-9307-21CC4289F58C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCut.DbMigrator", "SimpleCut.DbMigrator\SimpleCut.DbMigrator.csproj", "{2FEFDD8E-4ADD-47E1-8ED9-AC090F358DFA}"
-EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SimpleCut.Frontend", "SimpleCut.Frontend\", "{DDDF27AF-6846-47F3-8A9F-10752034C54C}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
@@ -39,6 +37,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SimpleCut.Frontend", "Simpl
 		VWDPort = "52152"
 		SlnRelativePath = "SimpleCut.Frontend\"
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCut.DbMigrator", "SimpleCut.DbMigrator\SimpleCut.DbMigrator.csproj", "{E61C221F-7E3F-4207-8263-741B66B80795}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -74,14 +74,14 @@ Global
 		{FCCC39C5-372F-443F-9307-21CC4289F58C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCCC39C5-372F-443F-9307-21CC4289F58C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCCC39C5-372F-443F-9307-21CC4289F58C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2FEFDD8E-4ADD-47E1-8ED9-AC090F358DFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2FEFDD8E-4ADD-47E1-8ED9-AC090F358DFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2FEFDD8E-4ADD-47E1-8ED9-AC090F358DFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2FEFDD8E-4ADD-47E1-8ED9-AC090F358DFA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DDDF27AF-6846-47F3-8A9F-10752034C54C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DDDF27AF-6846-47F3-8A9F-10752034C54C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDDF27AF-6846-47F3-8A9F-10752034C54C}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{DDDF27AF-6846-47F3-8A9F-10752034C54C}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{E61C221F-7E3F-4207-8263-741B66B80795}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E61C221F-7E3F-4207-8263-741B66B80795}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E61C221F-7E3F-4207-8263-741B66B80795}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E61C221F-7E3F-4207-8263-741B66B80795}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
