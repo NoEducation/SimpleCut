@@ -1,0 +1,92 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCut.Api", "SimpleCut.Api\SimpleCut.Api.csproj", "{4A52FD9C-E484-42C1-B7AB-E7044E3D81A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCut.Domain", "SimpleCut.Domain\SimpleCut.Domain.csproj", "{0B28F8EC-3C2C-404C-A6AE-1FD7D0966F1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCut.Infrastructure", "SimpleCut.Infrastructure\SimpleCut.Infrastructure.csproj", "{8E763881-711F-46F9-849B-CBD5BDD7275C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCut.Logic", "SimpleCut.Logic\SimpleCut.Logic.csproj", "{42D81A3E-EE25-4494-8105-32F29B9127A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCut.Common", "SimpleCut.Common\SimpleCut.Common.csproj", "{5EA05AF5-1E96-41A8-877E-0FA2D39B6104}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCut.Worker", "SimpleCut.Worker\SimpleCut.Worker.csproj", "{3D082872-4372-4819-8159-3B4F31D2A9AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCut.IntegrationTests", "SimpleCut.IntegrationTests\SimpleCut.IntegrationTests.csproj", "{FCCC39C5-372F-443F-9307-21CC4289F58C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCut.DbMigrator", "SimpleCut.DbMigrator\SimpleCut.DbMigrator.csproj", "{2FEFDD8E-4ADD-47E1-8ED9-AC090F358DFA}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SimpleCut.Frontend", "SimpleCut.Frontend\", "{DDDF27AF-6846-47F3-8A9F-10752034C54C}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_52152"
+		Debug.AspNetCompiler.PhysicalPath = "SimpleCut.Frontend\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_52152\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_52152"
+		Release.AspNetCompiler.PhysicalPath = "SimpleCut.Frontend\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_52152\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "52152"
+		SlnRelativePath = "SimpleCut.Frontend\"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A52FD9C-E484-42C1-B7AB-E7044E3D81A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A52FD9C-E484-42C1-B7AB-E7044E3D81A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A52FD9C-E484-42C1-B7AB-E7044E3D81A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A52FD9C-E484-42C1-B7AB-E7044E3D81A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B28F8EC-3C2C-404C-A6AE-1FD7D0966F1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B28F8EC-3C2C-404C-A6AE-1FD7D0966F1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B28F8EC-3C2C-404C-A6AE-1FD7D0966F1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B28F8EC-3C2C-404C-A6AE-1FD7D0966F1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E763881-711F-46F9-849B-CBD5BDD7275C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E763881-711F-46F9-849B-CBD5BDD7275C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E763881-711F-46F9-849B-CBD5BDD7275C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E763881-711F-46F9-849B-CBD5BDD7275C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42D81A3E-EE25-4494-8105-32F29B9127A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42D81A3E-EE25-4494-8105-32F29B9127A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42D81A3E-EE25-4494-8105-32F29B9127A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42D81A3E-EE25-4494-8105-32F29B9127A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EA05AF5-1E96-41A8-877E-0FA2D39B6104}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EA05AF5-1E96-41A8-877E-0FA2D39B6104}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EA05AF5-1E96-41A8-877E-0FA2D39B6104}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EA05AF5-1E96-41A8-877E-0FA2D39B6104}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D082872-4372-4819-8159-3B4F31D2A9AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D082872-4372-4819-8159-3B4F31D2A9AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D082872-4372-4819-8159-3B4F31D2A9AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D082872-4372-4819-8159-3B4F31D2A9AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCCC39C5-372F-443F-9307-21CC4289F58C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCCC39C5-372F-443F-9307-21CC4289F58C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCCC39C5-372F-443F-9307-21CC4289F58C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCCC39C5-372F-443F-9307-21CC4289F58C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FEFDD8E-4ADD-47E1-8ED9-AC090F358DFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FEFDD8E-4ADD-47E1-8ED9-AC090F358DFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FEFDD8E-4ADD-47E1-8ED9-AC090F358DFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FEFDD8E-4ADD-47E1-8ED9-AC090F358DFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDDF27AF-6846-47F3-8A9F-10752034C54C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDDF27AF-6846-47F3-8A9F-10752034C54C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDDF27AF-6846-47F3-8A9F-10752034C54C}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDDF27AF-6846-47F3-8A9F-10752034C54C}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FC9D0049-DE32-4922-A857-A39B1F9D9705}
+	EndGlobalSection
+EndGlobal
