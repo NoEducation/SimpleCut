@@ -1,4 +1,4 @@
-namespace SimpleCut.Api
+﻿namespace SimpleCut.Domain.EmptyFeature
 {
     public class WeatherForecast
     {

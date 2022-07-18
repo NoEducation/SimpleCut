@@ -1,15 +1,21 @@
+using MediatR;
+using SimpleCut.Infrastructure.Context;
+using System.Reflection;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddMediatR(Assembly.GetCallingAssembly(),
+                Assembly.Load("SimpleCut.Logic"));
+
+builder.Services.AddScoped<IDbContext>(
+    x => new DbContext(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
