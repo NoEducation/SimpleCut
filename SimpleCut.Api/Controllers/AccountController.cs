@@ -15,7 +15,7 @@ namespace SimpleCut.Api.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<string>> Login([FromBody] GetAccountTokenQuery query)
         {
-            var response = await Dispatcher.Send<GetAccountTokenQueryResponse>(query);
+            var response = await Dispatcher.SendAsync(query);
 
             return Ok(response.Result);
         }

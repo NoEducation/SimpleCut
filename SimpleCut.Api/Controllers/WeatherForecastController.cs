@@ -14,7 +14,7 @@ namespace SimpleCut.Api.Controllers
         [HttpGet("GetWeatherForecast")]
         public async Task<ActionResult<GetWeatherForecastQueryResponse>> Get()
         {
-            var response = await Dispatcher.Send<GetWeatherForecastQueryResponse>(new GetWeatherForecastQuery());
+            var response = await Dispatcher.SendAsync<GetWeatherForecastQueryResponse>(new GetWeatherForecastQuery());
 
             return response.Result;
         }
@@ -22,7 +22,7 @@ namespace SimpleCut.Api.Controllers
         [HttpGet("TryGetWeatherForecast")]
         public async Task<ActionResult<GetWeatherForecastQueryResponse>> TryGet()
         {
-            var response = await Dispatcher.Send<GetWeatherForecastQueryResponse>(new GetWeatherForecastQuery());
+            var response = await Dispatcher.SendAsync<GetWeatherForecastQueryResponse>(new GetWeatherForecastQuery());
 
             return response.Result;
         }

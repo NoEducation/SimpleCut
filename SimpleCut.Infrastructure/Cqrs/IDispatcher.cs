@@ -5,6 +5,6 @@ namespace SimpleCut.Infrastructure.Cqrs
 {
     public interface IDispatcher
     {
-        public Task<OperationResult<TResult>> Send<TResult>(IRequest<OperationResult<TResult>> query, CancellationToken token = default);
+        public Task<OperationResult<TResult>> SendAsync<TResult>(IRequest<OperationResult<TResult>> query, CancellationToken token = default);
     }
 }

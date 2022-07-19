@@ -13,9 +13,9 @@ namespace SimpleCut.Infrastructure.Cqrs
             this._mediator = mediator;
         }
 
-        public async Task<OperationResult<TResult>> Send<TResult>(IRequest<OperationResult<TResult>> query, CancellationToken token = default)
+        public async Task<OperationResult<TResult>> SendAsync<TResult>(IRequest<OperationResult<TResult>> query, CancellationToken token = default)
         {
-            var result = await _mediator.Send<OperationResult<TResult>>(query, token);
+            var result = await _mediator.Send(query, token);
 
             // TODO.DA i do not like it. I will try find another apporach
             if (!result.Success)

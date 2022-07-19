@@ -43,7 +43,7 @@ namespace SimpleCut.Logic.Account.Queries
                 return result;
             }
 
-            var accessTokenResponse = await _dispatcher.Send(new GetAccessTokenQuery() { Password = request.Password });
+            var accessTokenResponse = await _dispatcher.SendAsync(new GetAccessTokenQuery() { Password = request.Password });
 
             if (accessTokenResponse?.Result?.PasswordHash != user.Password)
             {
