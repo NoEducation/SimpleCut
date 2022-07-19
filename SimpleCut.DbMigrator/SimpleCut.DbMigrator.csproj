@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -9,7 +9,8 @@
 
   <ItemGroup>
     <None Remove="appsettings.json" />
-    <None Remove="Scripts\InitScript.sql" />
+    <None Remove="Scripts\CreateUserTable.sql" />
+    <None Remove="Seeds\InsertUsers.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,8 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Scripts\InitScript.sql">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <EmbeddedResource Include="Scripts\CreateUserTable.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Seeds\InsertUsers.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
 

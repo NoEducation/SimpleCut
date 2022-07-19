@@ -1,5 +1,7 @@
 ﻿using DbUp;
 using DbUp.Engine;
+using Npgsql;
+using System.Reflection;
 
 namespace SimpleCut.DbMigrator
 {
@@ -7,8 +9,11 @@ namespace SimpleCut.DbMigrator
     {
         public List<SqlScript> allExecutedScripts = new List<SqlScript>();
 
-        public DatabaseUpgradeResult UpgradeDatabase(string connectionString, string path)
+        public DatabaseUpgradeResult UpgradeDatabase(string connectionString, string path, bool dropDatabase = false)
         {
+            if(dropDatabase)
+                DropDatabase(connectionString);
+
             EnsureDatabase.For.PostgresqlDatabase(connectionString);
 
             DatabaseUpgradeResult upgradeResult = PerformUpgrade(connectionString, path);
@@ -24,13 +29,36 @@ namespace SimpleCut.DbMigrator
                 .LogToConsole()
                 .WithTransaction()
                 .WithVariablesDisabled()
-                .WithScriptsFromFileSystem(filesInPath);
+                .WithScriptsEmbeddedInAssembly(Assembly.GetExecutingAssembly());
 
             var result = builder.Build().PerformUpgrade();
 
             allExecutedScripts.AddRange(result.Scripts);
 
             return result;
+        }
+
+        public static void DropDatabase(string connectionString)
+        {
+            var builder = new NpgsqlConnectionStringBuilder(connectionString);
+
+            var databaseName = builder.Database;
+            builder.Database = "postgres";
+
+            using var connection = new NpgsqlConnection(builder.ToString());
+            
+            connection.Open();
+
+            using (var command = new NpgsqlCommand($"SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = \'{databaseName}\'; DROP DATABASE IF EXISTS \"{databaseName}\"", connection))
+            {
+                command.ExecuteNonQuery();
+            }
+
+            connection.Close();
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Dropped database {databaseName}!");
+            Console.ResetColor();
         }
     }
 }

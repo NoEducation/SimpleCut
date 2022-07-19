@@ -3,19 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCut.Api", "SimpleCut.Api\SimpleCut.Api.csproj", "{4A52FD9C-E484-42C1-B7AB-E7044E3D81A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCut.Api", "SimpleCut.Api\SimpleCut.Api.csproj", "{4A52FD9C-E484-42C1-B7AB-E7044E3D81A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCut.Domain", "SimpleCut.Domain\SimpleCut.Domain.csproj", "{0B28F8EC-3C2C-404C-A6AE-1FD7D0966F1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCut.Domain", "SimpleCut.Domain\SimpleCut.Domain.csproj", "{0B28F8EC-3C2C-404C-A6AE-1FD7D0966F1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCut.Infrastructure", "SimpleCut.Infrastructure\SimpleCut.Infrastructure.csproj", "{8E763881-711F-46F9-849B-CBD5BDD7275C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCut.Infrastructure", "SimpleCut.Infrastructure\SimpleCut.Infrastructure.csproj", "{8E763881-711F-46F9-849B-CBD5BDD7275C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCut.Logic", "SimpleCut.Logic\SimpleCut.Logic.csproj", "{42D81A3E-EE25-4494-8105-32F29B9127A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCut.Logic", "SimpleCut.Logic\SimpleCut.Logic.csproj", "{42D81A3E-EE25-4494-8105-32F29B9127A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCut.Common", "SimpleCut.Common\SimpleCut.Common.csproj", "{5EA05AF5-1E96-41A8-877E-0FA2D39B6104}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCut.Common", "SimpleCut.Common\SimpleCut.Common.csproj", "{5EA05AF5-1E96-41A8-877E-0FA2D39B6104}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCut.Worker", "SimpleCut.Worker\SimpleCut.Worker.csproj", "{3D082872-4372-4819-8159-3B4F31D2A9AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCut.Worker", "SimpleCut.Worker\SimpleCut.Worker.csproj", "{3D082872-4372-4819-8159-3B4F31D2A9AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCut.IntegrationTests", "SimpleCut.IntegrationTests\SimpleCut.IntegrationTests.csproj", "{FCCC39C5-372F-443F-9307-21CC4289F58C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCut.IntegrationTests", "SimpleCut.IntegrationTests\SimpleCut.IntegrationTests.csproj", "{FCCC39C5-372F-443F-9307-21CC4289F58C}"
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SimpleCut.Frontend", "SimpleCut.Frontend\", "{DDDF27AF-6846-47F3-8A9F-10752034C54C}"
 	ProjectSection(WebsiteProperties) = preProject
@@ -38,7 +38,9 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SimpleCut.Frontend", "Simpl
 		SlnRelativePath = "SimpleCut.Frontend\"
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCut.DbMigrator", "SimpleCut.DbMigrator\SimpleCut.DbMigrator.csproj", "{E61C221F-7E3F-4207-8263-741B66B80795}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCut.DbMigrator", "SimpleCut.DbMigrator\SimpleCut.DbMigrator.csproj", "{E61C221F-7E3F-4207-8263-741B66B80795}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCut.Resources", "SimpleCut.Resources\SimpleCut.Resources.csproj", "{E2035AAC-BFF8-4140-B334-2F40B9598E31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,13 +77,16 @@ Global
 		{FCCC39C5-372F-443F-9307-21CC4289F58C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCCC39C5-372F-443F-9307-21CC4289F58C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DDDF27AF-6846-47F3-8A9F-10752034C54C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DDDF27AF-6846-47F3-8A9F-10752034C54C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDDF27AF-6846-47F3-8A9F-10752034C54C}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{DDDF27AF-6846-47F3-8A9F-10752034C54C}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{E61C221F-7E3F-4207-8263-741B66B80795}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E61C221F-7E3F-4207-8263-741B66B80795}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E61C221F-7E3F-4207-8263-741B66B80795}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E61C221F-7E3F-4207-8263-741B66B80795}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2035AAC-BFF8-4140-B334-2F40B9598E31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2035AAC-BFF8-4140-B334-2F40B9598E31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2035AAC-BFF8-4140-B334-2F40B9598E31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2035AAC-BFF8-4140-B334-2F40B9598E31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

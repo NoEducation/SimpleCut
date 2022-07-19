@@ -10,6 +10,7 @@ namespace SimpleCut.DbMigrator
         static int Main(string[] args)
         {
             var connectionString = GetConnectionString();
+            var dropDatabase = _configuration.GetValue<bool>("DropDatabase");
 
             var upgrader = new DbUpgrader();
 
@@ -18,7 +19,7 @@ namespace SimpleCut.DbMigrator
                 Console.WriteLine("DB Update connectionString: " + connectionString);
 
                 var result = upgrader.UpgradeDatabase(connectionString,
-                    Path.Combine(Directory.GetCurrentDirectory(), "Scripts"));
+                    Path.Combine(Directory.GetCurrentDirectory()), dropDatabase);
 
                 if (!result.Successful)
                 {

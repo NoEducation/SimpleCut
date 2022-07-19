@@ -1,20 +1,30 @@
-using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SimpleCut.Infrastructure.Cqrs;
 using SimpleCut.Logic.EmptyFeature.Queries;
 
 namespace SimpleCut.Api.Controllers
 {
     public class WeatherForecastController : BaseController
     {
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IMediator mediator) : base(mediator)
+        public WeatherForecastController(IDispatcher dispatcher) : base(dispatcher)
         {}
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public async Task<GetWeatherForecastQueryResponse> Get()
+        [AllowAnonymous]
+        [HttpGet("GetWeatherForecast")]
+        public async Task<ActionResult<GetWeatherForecastQueryResponse>> Get()
         {
-            var response = await Mediator.Send(new GetWeatherForecastQuery());
+            var response = await Dispatcher.Send<GetWeatherForecastQueryResponse>(new GetWeatherForecastQuery());
 
-            return response;
+            return response.Result;
+        }
+
+        [HttpGet("TryGetWeatherForecast")]
+        public async Task<ActionResult<GetWeatherForecastQueryResponse>> TryGet()
+        {
+            var response = await Dispatcher.Send<GetWeatherForecastQueryResponse>(new GetWeatherForecastQuery());
+
+            return response.Result;
         }
     }
 }

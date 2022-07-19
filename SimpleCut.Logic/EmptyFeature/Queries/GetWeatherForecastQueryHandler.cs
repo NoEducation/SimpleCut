@@ -1,13 +1,14 @@
-﻿using MediatR;
+﻿using Dapper.Contrib.Extensions;
+using MediatR;
+using SimpleCut.Common.Dtos;
 using SimpleCut.Domain.EmptyFeature;
+using SimpleCut.Domain.Users;
 using SimpleCut.Infrastructure.Context;
-using Dapper;
-using Dapper.Contrib.Extensions;
 
 namespace SimpleCut.Logic.EmptyFeature.Queries
 {
     // It's just for testing archtecture purpose
-    public class GetWeatherForecastQueryHandler : IRequestHandler<GetWeatherForecastQuery, GetWeatherForecastQueryResponse>
+    public class GetWeatherForecastQueryHandler : IRequestHandler<GetWeatherForecastQuery, OperationResult<GetWeatherForecastQueryResponse>>
     {
         private static readonly string[] Summaries = new[]
         {
@@ -21,7 +22,7 @@ namespace SimpleCut.Logic.EmptyFeature.Queries
             _context = context;
         }
 
-        public async Task<GetWeatherForecastQueryResponse> Handle(GetWeatherForecastQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<GetWeatherForecastQueryResponse>> Handle(GetWeatherForecastQuery request, CancellationToken cancellationToken)
         {
             var weatherForecasts =  Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
@@ -30,18 +31,7 @@ namespace SimpleCut.Logic.EmptyFeature.Queries
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             }).ToArray();
 
-            var cars = await _context.Connection.GetAllAsync<Film>();
-
-            _context.BeginTransaction();
-
-            _context.Connection.Execute(@"INSERT INTO public.films(
-	code, title, did, dateprod, kind)
-	VALUES ('test3', 'test1', 1, now(), 'test');");
-            _context.Connection.Execute(@"INSERT INTO public.films(
-	code, title, did, dateprod, kind)
-	VALUES ('test4', 'test1', 1, now(), 'test');");
-
-            _context.CommitTransaction();
+            var cars = await _context.Connection.GetAllAsync<Role>();
 
 
  //           await _context.ExecuteInTransation(x => x.Execute(@"
@@ -53,9 +43,12 @@ namespace SimpleCut.Logic.EmptyFeature.Queries
 	//VALUES ('test2', 'test1', 1, now(), 'test');"));
 
 
-            return await Task.FromResult(new GetWeatherForecastQueryResponse()
+            return await Task.FromResult(new OperationResult<GetWeatherForecastQueryResponse>()
             {
-                WeatherForecasts = weatherForecasts
+                Result = new GetWeatherForecastQueryResponse()
+                {
+                    WeatherForecasts = weatherForecasts
+                }
             });
         }
     }
