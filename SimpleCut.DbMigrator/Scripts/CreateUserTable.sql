@@ -11,9 +11,18 @@ CREATE TABLE PUBLIC.Users
 	BirthDate TIMESTAMPTZ NOT NULL,
 	Gender smallint NOT NULL,
 	Description TEXT NULL,
+	AddedDate TIMESTAMPTZ NOT NULL,
+	AddedByUserId INT NULL,
+	ModifedDate TIMESTAMPTZ NULL,
+	ModifiedByUserId INT NULL,
 
 	CONSTRAINT UQ_UserLogin UNIQUE(Login),
-	CONSTRAINT UQ_UserEmail UNIQUE(Email)
+	CONSTRAINT UQ_UserEmail UNIQUE(Email),
+
+	CONSTRAINT UserUsersAddedByUserId FOREIGN KEY(AddedByUserId) 
+		REFERENCES public.Users(UserId),
+	CONSTRAINT UserUsersModifiedByUserId FOREIGN KEY(ModifiedByUserId) 
+		REFERENCES public.Users(UserId)
 );
 
 CREATE TABLE PUBLIC.Roles
@@ -28,10 +37,19 @@ CREATE TABLE PUBLIC.UserRoles
 	UserRoleId INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) ,
  	UserId INT NOT NULL,
 	RoleId INT NOT NULL,
-	
+	AddedDate TIMESTAMPTZ NULL,
+	AddedByUserId INT NULL,
+	ModifedDate TIMESTAMPTZ NULL,
+	ModifiedByUserId INT NULL,
+
 	CONSTRAINT UserRolesRoleId FOREIGN KEY(RoleId) 
 		REFERENCES public.Roles(RoleId),
 	CONSTRAINT UserRoleUserId FOREIGN KEY(UserId) 
+		REFERENCES public.Users(UserId),
+
+	CONSTRAINT UserRolesUsersAddedByUserId FOREIGN KEY(AddedByUserId) 
+		REFERENCES public.Users(UserId),
+	CONSTRAINT UserRolesUsersModifiedByUserId FOREIGN KEY(ModifiedByUserId) 
 		REFERENCES public.Users(UserId)
 );
 

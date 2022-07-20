@@ -1,13 +1,13 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.Extensions.Options;
 using SimpleCut.Common.Dtos;
 using SimpleCut.Common.Options;
+using SimpleCut.Infrastructure.Cqrs;
 using System.Text;
 
 namespace SimpleCut.Logic.Account.Queries
 {
-    public class GetAccessTokenQueryHandler : IRequestHandler<GetAccessTokenQuery, OperationResult<GetAccessTokenQueryResponse>>
+    public class GetAccessTokenQueryHandler : IQueryHandler<GetAccessTokenQuery, GetAccessTokenQueryResponse>
     {
         private readonly TokenOptions _tokenOptions;
         public GetAccessTokenQueryHandler(IOptions<TokenOptions> options)

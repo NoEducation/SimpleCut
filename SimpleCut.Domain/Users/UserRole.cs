@@ -8,15 +8,9 @@ namespace SimpleCut.Domain.Users
         public int UserRoleId { get; set; }
         public int UserId { get; set; }
         public int RoleId { get; set; }
-
-        public UserRole(int userRoleId, int userId, int roleId)
-        {
-            UserRoleId = userRoleId;
-            UserId = userId;
-            RoleId = roleId;
-        }
-
-        public UserRole()
-        {}
+        public DateTimeOffset AddedDate { get; set; }
+        public int? AddedByUserId { get; set; }
+        public DateTimeOffset? ModifedDate { get; set; }
+        public int? ModifiedByUserId { get; set; }
     }
 }

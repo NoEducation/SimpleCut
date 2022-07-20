@@ -1,10 +1,9 @@
-﻿using MediatR;
-using SimpleCut.Common.Dtos;
+﻿using SimpleCut.Infrastructure.Cqrs;
 
 namespace SimpleCut.Logic.Account.Queries
 {
-    // It should be renamed
-    public class GetAccessTokenQuery : IRequest<OperationResult<GetAccessTokenQueryResponse>>
+    //TODO.DA It should be renamed
+    public class GetAccessTokenQuery : IQuery<GetAccessTokenQueryResponse>
     {
         public string? Password { get; set; }
 

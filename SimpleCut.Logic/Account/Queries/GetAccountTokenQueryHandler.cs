@@ -1,30 +1,31 @@
-﻿using MediatR;
-using SimpleCut.Infrastructure.Context;
+﻿using Dapper;
+using Microsoft.Extensions.Options;
 using SimpleCut.Common.Dtos;
-using Dapper;
+using SimpleCut.Common.Options;
 using SimpleCut.Domain.Users;
+using SimpleCut.Infrastructure.Context;
+using SimpleCut.Infrastructure.Cqrs;
+using SimpleCut.Infrastructure.Services.Accounts;
 using SimpleCut.Resources;
 using System.Security.Claims;
-using System.IdentityModel.Tokens.Jwt;
-using Microsoft.IdentityModel.Tokens;
-using SimpleCut.Common.Options;
-using Microsoft.Extensions.Options;
-using System.Security.Cryptography;
-using System.Text;
-using SimpleCut.Infrastructure.Cqrs;
 
 namespace SimpleCut.Logic.Account.Queries
 {
-    public class GetAccountTokenQueryHandler : IRequestHandler<GetAccountTokenQuery, OperationResult<GetAccountTokenQueryResponse>>
+    public class GetAccountTokenQueryHandler : IQueryHandler<GetAccountTokenQuery, GetAccountTokenQueryResponse>
     {
         private readonly IDbContext _context;
         private readonly IDispatcher _dispatcher;
         private readonly TokenOptions _tokenOptions;
-        public GetAccountTokenQueryHandler(IDbContext context, IDispatcher dispatcher, IOptions<TokenOptions> options)
+        private readonly ITokenService _tokenService;
+        public GetAccountTokenQueryHandler(IDbContext context, 
+            IDispatcher dispatcher,
+            IOptions<TokenOptions> options,
+            ITokenService tokenService)
         {
             _context = context;
             _dispatcher = dispatcher;
             _tokenOptions = options.Value;
+            _tokenService = tokenService;
         }
 
         public async Task<OperationResult<GetAccountTokenQueryResponse>> Handle(GetAccountTokenQuery request, CancellationToken cancellationToken)
@@ -51,9 +52,9 @@ namespace SimpleCut.Logic.Account.Queries
                 return result;
             }
 
-            var refreshTokenKey = GenerateRefreshToken();
+            var refreshTokenKey = _tokenService.GenerateRefreshToken();
             var refreshToken = CreateRefreshToken(user, refreshTokenKey);
-            var accessToken = GenerateAccessToken(new List<Claim>() 
+            var accessToken = _tokenService.GenerateAccessToken(new List<Claim>() 
                 { 
                     new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()) 
                 }
@@ -97,34 +98,6 @@ namespace SimpleCut.Logic.Account.Queries
                     RefreshToken = refreshTokenKey
                 }
             };
-        }
-
-        private string GenerateAccessToken(IEnumerable<Claim> claims)
-        {
-            var jwtHandler = new JwtSecurityTokenHandler();
-
-            var descriptor = new SecurityTokenDescriptor()
-            {
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddMinutes(_tokenOptions.AccessTokenTimeValid),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_tokenOptions.Secrete)),
-                    SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = jwtHandler.CreateToken(descriptor);
-            return jwtHandler.WriteToken(token);
-        }
-
-        private string GenerateRefreshToken()
-        {
-            using var rngCryptoServiceProvider = new RNGCryptoServiceProvider();
-            var randomBytes = new byte[40];
-            rngCryptoServiceProvider.GetBytes(randomBytes);
-            return BitConverter.ToString(randomBytes).Replace(" - ", "");
-        }
-
-        private ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
-        {
-            throw new NotImplementedException();
         }
 
         private RefreshToken CreateRefreshToken(User user, string refreshTokenKey)

@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using SimpleCut.Common.Dtos;
-using SimpleCut.Common.Exceptions;
 
 namespace SimpleCut.Infrastructure.Cqrs
 {
@@ -13,15 +12,16 @@ namespace SimpleCut.Infrastructure.Cqrs
             this._mediator = mediator;
         }
 
-        public async Task<OperationResult<TResult>> SendAsync<TResult>(IRequest<OperationResult<TResult>> query, CancellationToken token = default)
+        public async Task<OperationResult<TResult>> SendAsync<TResult>(IQuery<TResult> query, CancellationToken token = default)
         {
             var result = await _mediator.Send(query, token);
 
-            // TODO.DA i do not like it. I will try find another apporach
-            if (!result.Success)
-            {
-                throw new SimpleCutValidationExpection(result.JoinErrors());
-            }
+            return result;
+        }
+
+        public async Task<OperationResult> SendAsync(ICommand command, CancellationToken token = default)
+        {
+            var result = await _mediator.Send(command, token);
 
             return result;
         }

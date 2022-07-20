@@ -10,21 +10,21 @@ namespace SimpleCut.Api.Controllers
         public WeatherForecastController(IDispatcher dispatcher) : base(dispatcher)
         {}
 
-        [AllowAnonymous]
-        [HttpGet("GetWeatherForecast")]
-        public async Task<ActionResult<GetWeatherForecastQueryResponse>> Get()
-        {
-            var response = await Dispatcher.SendAsync<GetWeatherForecastQueryResponse>(new GetWeatherForecastQuery());
+        //[AllowAnonymous]
+        //[HttpGet("GetWeatherForecast")]
+        //public async Task<ActionResult<GetWeatherForecastQueryResponse>> Get()
+        //{
+        //    var response = await Dispatcher.SendAsync<GetWeatherForecastQueryResponse>(new GetWeatherForecastQuery());
 
-            return response.Result;
-        }
+        //    return response.Result;
+        //}
 
-        [HttpGet("TryGetWeatherForecast")]
-        public async Task<ActionResult<GetWeatherForecastQueryResponse>> TryGet()
-        {
-            var response = await Dispatcher.SendAsync<GetWeatherForecastQueryResponse>(new GetWeatherForecastQuery());
+        //[HttpGet("TryGetWeatherForecast")]
+        //public async Task<ActionResult<GetWeatherForecastQueryResponse>> TryGet()
+        //{
+        //    var response = await Dispatcher.SendAsync<GetWeatherForecastQueryResponse>(new GetWeatherForecastQuery());
 
-            return response.Result;
-        }
+        //    return response.Result;
+        //}
     }
 }

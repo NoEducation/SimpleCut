@@ -1,6 +1,6 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SimpleCut.Common.Dtos;
 using SimpleCut.Infrastructure.Cqrs;
 using SimpleCut.Logic.Account.Queries;
 
@@ -13,16 +13,16 @@ namespace SimpleCut.Api.Controllers
 
         [HttpPost("Login")]
         [AllowAnonymous]
-        public async Task<ActionResult<string>> Login([FromBody] GetAccountTokenQuery query)
+        public async Task<OperationResult<GetAccountTokenQueryResponse>> Login([FromBody] GetAccountTokenQuery query)
         {
-            var response = await Dispatcher.SendAsync(query);
+            var response = await this.DispatchAsync(query);
 
-            return Ok(response.Result);
+            return response;
         }
 
         //[HttpPost("Register")]
         //[AllowAnonymous]
-        //public async Task<IActionResult> Register(RegisterUserDto model)
+        //public async Task<OperationResult> Register(RegisterUserDto model)
         //{
         //    try
         //    {

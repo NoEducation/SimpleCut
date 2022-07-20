@@ -6,6 +6,7 @@ namespace SimpleCut.Domain.Users
     {
         [Key]
         public int RefreshTokenId { get; set; }
+        public int UserId { get; set; }
         public string? Token { get; set; }
         public DateTimeOffset ExpiresDate { get; set; }
         public DateTimeOffset CreatedDate { get; set; }
@@ -17,7 +18,5 @@ namespace SimpleCut.Domain.Users
 
         [Computed]
         public bool IsActive => RevokedDate == null && !IsExpired;
-
-        public int UserId { get; set; }
     }
 }

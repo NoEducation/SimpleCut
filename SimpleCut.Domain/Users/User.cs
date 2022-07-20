@@ -17,33 +17,9 @@ namespace SimpleCut.Domain.Users
         public DateTimeOffset BirthDate { get; set; }
         public Gender Gender { get; set; }
         public string? Description { get; set; }
-
-        public User(int userId,
-         string login,
-         string email,
-         string password,
-         bool isActive,
-         bool isConfirmed,
-         string name,
-         string surname,
-         DateTimeOffset birthDate,
-         Gender gender,
-         string? description)
-        {
-            UserId = userId;
-            Login = login;
-            Email = email;
-            Password = password;
-            IsActive = isActive;
-            IsConfirmed = isConfirmed;
-            Name = name;
-            Surname = surname;
-            BirthDate = birthDate;
-            Gender = gender;
-            Description = description;
-        }
-
-        public User()
-        {}
+        public DateTimeOffset AddedDate { get; set; }
+        public int? AddedByUserId { get; set; }
+        public DateTimeOffset? ModifedDate { get; set; }
+        public int? ModifiedByUserId { get; set; }
     }
 }
