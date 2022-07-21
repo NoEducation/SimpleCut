@@ -1,6 +1,6 @@
 ﻿using Dapper.Contrib.Extensions;
 
-namespace SimpleCut.Domain.Users
+namespace SimpleCut.Domain.Accounts
 {
     public class RefreshToken
     {
@@ -8,9 +8,9 @@ namespace SimpleCut.Domain.Users
         public int RefreshTokenId { get; set; }
         public int UserId { get; set; }
         public string? Token { get; set; }
-        public DateTimeOffset ExpiresDate { get; set; }
-        public DateTimeOffset CreatedDate { get; set; }
-        public DateTimeOffset? RevokedDate { get; set; }
+        public DateTime ExpiresDate { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime? RevokedDate { get; set; }
         public string? ReplacedByToken { get; set; }
 
         [Computed]

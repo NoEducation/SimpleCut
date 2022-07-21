@@ -5,7 +5,7 @@ using SimpleCut.Infrastructure.Cqrs;
 
 namespace SimpleCut.Infrastructure.BehaviourPipelines
 {
-    public sealed class ValidationBehavior<TRequest> : IPipelineBehavior<TRequest, OperationResult>
+    public sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, OperationResult>
         where TRequest : class, ICommand
     {
         private readonly IEnumerable<IValidator<TRequest>> _validators;
@@ -17,11 +17,15 @@ namespace SimpleCut.Infrastructure.BehaviourPipelines
                 return await next();
             }
             var context = new ValidationContext<TRequest>(request);
-            var operationErrors = _validators
-                .Select(x => x.Validate(context))
-                .SelectMany(x => x.Errors)
-                .Where(x => x != null)
-                .Select(x => new OperationError(x.ErrorMessage, x.PropertyName));
+            var operationErrors = new HashSet<OperationError>();
+
+            foreach(var validator in _validators)
+            {
+                var validationResult = validator.Validate(request);
+
+                validationResult.Errors.ForEach(x =>
+                    operationErrors.Add(new OperationError(x.PropertyName, x.ErrorMessage)));
+            }
 
             if (operationErrors.Any())
             {

@@ -1,7 +1,7 @@
 ﻿using Dapper.Contrib.Extensions;
-using SimpleCut.Domain.Users.Enums;
+using SimpleCut.Domain.Accounts.Enums;
 
-namespace SimpleCut.Domain.Users
+namespace SimpleCut.Domain.Accounts
 {
     public class User
     {
@@ -14,12 +14,12 @@ namespace SimpleCut.Domain.Users
         public bool IsConfirmed { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public DateTimeOffset BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
         public Gender Gender { get; set; }
         public string? Description { get; set; }
-        public DateTimeOffset AddedDate { get; set; }
+        public DateTime AddedDate { get; set; }
         public int? AddedByUserId { get; set; }
-        public DateTimeOffset? ModifedDate { get; set; }
+        public DateTime? ModifedDate { get; set; }
         public int? ModifiedByUserId { get; set; }
     }
 }

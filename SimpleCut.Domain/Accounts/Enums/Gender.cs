@@ -1,4 +1,4 @@
-﻿namespace SimpleCut.Domain.Users.Enums
+﻿namespace SimpleCut.Domain.Accounts.Enums
 {
     public enum Gender
     {

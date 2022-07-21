@@ -5,6 +5,7 @@ namespace SimpleCut.Infrastructure.Services.Accounts
 {
     public class PasswordHasherService : IPasswordHasherService
     {
+        //TODO.DA dodaj pieprz
         public string GenerateHash(string password, string salt)
         {
             var hash = KeyDerivation.Pbkdf2(

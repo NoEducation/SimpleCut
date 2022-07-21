@@ -1,6 +1,6 @@
 ﻿using Dapper.Contrib.Extensions;
 
-namespace SimpleCut.Domain.Users
+namespace SimpleCut.Domain.Accounts
 {
     public class Role
     {

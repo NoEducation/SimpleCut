@@ -1,15 +1,24 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using SimpleCut.Common.Dtos;
+using SimpleCut.Common.Options;
 using SimpleCut.Infrastructure.Cqrs;
-using SimpleCut.Logic.Account.Queries;
+using SimpleCut.Logic.Accounts.Commands;
+using SimpleCut.Logic.Accounts.Queries;
 
 namespace SimpleCut.Api.Controllers
 {
     public class AccountController : BaseController
     {
-        public AccountController(IDispatcher dispatcher) : base(dispatcher)
-        {}
+        private readonly TokenOptions _tokenOptions;
+
+        public AccountController(IDispatcher dispatcher,
+            IHttpContextAccessor httpContextAccessor,
+            IOptions<TokenOptions> tokenOptions) : base(dispatcher, httpContextAccessor)
+        {
+            _tokenOptions = tokenOptions.Value;
+        }
 
         [HttpPost("Login")]
         [AllowAnonymous]
@@ -17,68 +26,64 @@ namespace SimpleCut.Api.Controllers
         {
             var response = await this.DispatchAsync(query);
 
+            await this.DispatchAsync(new CreateRefreshTokenCommand()
+            { 
+                RefreshTokenKey = response.Result.RefreshToken,
+                UserId = response.Result.UserId
+            });
+
+            SetTokenCookie(response.Result.RefreshToken);
+            response.Result.RefreshToken = null;
+
             return response;
         }
 
-        //[HttpPost("Register")]
-        //[AllowAnonymous]
-        //public async Task<OperationResult> Register(RegisterUserDto model)
-        //{
-        //    try
-        //    {
-        //        await this._accountService.Register(model);
-        //    }
-        //    catch (ValidationArchitectureException exception)
-        //    {
-        //        return BadRequest(exception.Errors.ToString());
-        //    }
+        [HttpPost("Register")]
+        [AllowAnonymous]
+        public async Task<OperationResult> Register(CreateUserCommand command)
+        {
+            var result = await this.DispatchAsync(command);
 
-        //    return Ok();
-        //}
+            return result;
+        }
 
 
-        //[HttpGet("RefreshToken")]
-        //[AllowAnonymous]
-        //public async Task<ActionResult<string>> RefreshToken(int userId)
-        //{
-        //    string accessToken = null;
-        //    var refreshToken = Request.Cookies["refreshToken"];
+        [HttpGet("RefreshToken")]
+        [AllowAnonymous]
+        public async Task<OperationResult<GetAccessTokenBasedOnRefreshTokenQueryResponse>> RefreshToken()
+        {
+            var refreshToken = Request.Cookies["refreshToken"];
 
-        //    try
-        //    {
-        //        accessToken = await this._accountService.GetAccessToken(refreshToken, userId);
-        //    }
-        //    catch (AuthorizationArchitectureException)
-        //    {
-        //        return Unauthorized();
-        //    }
+            var result = await DispatchAsync(
+                new GetAccessTokenBasedOnRefreshTokenQuery()
+                {
+                    UserId = CurrentUserId,
+                    RefreshToken = refreshToken
+                });
 
-        //    return Ok(accessToken);
-        //}
+            return result;
+        }
 
-        //[HttpPost("RevokeRefreshToken")]
-        //public async Task<ActionResult<string>> RevokeRefreshToken(string refreshToken)
-        //{
-        //    try
-        //    {
-        //        await this._accountService.RevokeRefreshToken(refreshToken,
-        //            Int32.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier)));
-        //    }
-        //    catch (AuthorizationArchitectureException)
-        //    {
-        //        return BadRequest("Invalid token");
-        //    }
+        [HttpPost("RevokeRefreshToken")]
+        public async Task<OperationResult> RevokeRefreshToken([FromQuery] string refreshToken)
+        {
+            var result = await this.DispatchAsync(new RevokeRefreshTokenCommand()
+            {
+                RefreshToken = refreshToken,
+                UserId = CurrentUserId
+            });
 
-        //    return Ok();
-        //}
+            return result;
+        }
 
         private void SetTokenCookie(string token)
         {
             var cookieOptions = new CookieOptions
             {
                 HttpOnly = true,
-                Expires = DateTime.UtcNow.AddDays(7) // TODO.DA zwraca cały obiekt i ustwaic tu wartość
+                Expires = DateTime.UtcNow.AddDays(_tokenOptions.RefreshTokenTimeValid)
             };
+
             Response.Cookies.Append("refreshToken", token, cookieOptions);
         }
     }

@@ -1,14 +1,14 @@
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using SimpleCut.Common.Options;
+using SimpleCut.Infrastructure.BehaviourPipelines;
 using SimpleCut.Infrastructure.Context;
 using SimpleCut.Infrastructure.Cqrs;
-using SimpleCut.Infrastructure.BehaviourPipelines;
+using SimpleCut.Infrastructure.Services.Accounts;
 using System.Reflection;
 using System.Text;
-using FluentValidation;
-using SimpleCut.Infrastructure.Services.Accounts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,11 +25,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
 builder.Services.Configure<TokenOptions>(builder.Configuration.GetSection(TokenOptions.Position));
-builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<>));
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 builder.Services.AddValidatorsFromAssembly(Assembly.Load("SimpleCut.Logic"));
 
 builder.Services.AddScoped<IPasswordHasherService, PasswordHasherService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+
+
+builder.Services.AddHttpContextAccessor();
 
 var tokenKey = Encoding.ASCII.GetBytes(
         builder.Configuration.GetValue<string>("Token:Secrete"));
