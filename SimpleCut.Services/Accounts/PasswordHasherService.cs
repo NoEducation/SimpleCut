@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Text;
 
-namespace SimpleCut.Infrastructure.Services.Accounts
+namespace SimpleCut.Services.Accounts
 {
     public class PasswordHasherService : IPasswordHasherService
     {
@@ -18,7 +18,7 @@ namespace SimpleCut.Infrastructure.Services.Accounts
             return Convert.ToBase64String(hash);
         }
 
-        public bool CompareHash(string passwordHash, string password, string salt)
+        public bool CompareHashWithPassword(string passwordHash, string password, string salt)
         {
             var target = GenerateHash(password, salt);
             return passwordHash == target;

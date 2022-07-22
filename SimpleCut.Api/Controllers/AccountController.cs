@@ -26,6 +26,9 @@ namespace SimpleCut.Api.Controllers
         {
             var response = await this.DispatchAsync(query);
 
+            if (!response.Success)
+                return response;
+
             await this.DispatchAsync(new CreateRefreshTokenCommand()
             { 
                 RefreshTokenKey = response.Result.RefreshToken,

@@ -18,8 +18,7 @@ namespace SimpleCut.DbMigrator
             {
                 Console.WriteLine("DB Update connectionString: " + connectionString);
 
-                var result = upgrader.UpgradeDatabase(connectionString,
-                    Path.Combine(Directory.GetCurrentDirectory()), dropDatabase);
+                var result = upgrader.UpgradeDatabase(connectionString, dropDatabase);
 
                 if (!result.Successful)
                 {
@@ -71,6 +70,7 @@ namespace SimpleCut.DbMigrator
         {
             _configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", false)
+                .AddJsonFile("appsettings.Development.json", true)
                 .AddEnvironmentVariables()
                 .Build();
 

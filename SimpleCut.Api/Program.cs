@@ -1,37 +1,22 @@
-using FluentValidation;
-using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using SimpleCut.Common.Options;
-using SimpleCut.Infrastructure.BehaviourPipelines;
 using SimpleCut.Infrastructure.Context;
-using SimpleCut.Infrastructure.Cqrs;
-using SimpleCut.Infrastructure.Services.Accounts;
-using System.Reflection;
+using SimpleCut.Infrastructure.Dependency;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-builder.Services.AddMediatR(Assembly.GetCallingAssembly(),
-                Assembly.Load("SimpleCut.Logic"));
-
 builder.Services.AddScoped<IDbContext>(
     x => new DbContext(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddTransient<IDispatcher, Dispatcher>();
+builder.Services.AddCqrs();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
-builder.Services.Configure<TokenOptions>(builder.Configuration.GetSection(TokenOptions.Position));
-builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-builder.Services.AddValidatorsFromAssembly(Assembly.Load("SimpleCut.Logic"));
-
-builder.Services.AddScoped<IPasswordHasherService, PasswordHasherService>();
-builder.Services.AddScoped<ITokenService, TokenService>();
-
-
+builder.Services.AddOptions(builder.Configuration);
+builder.Services.AddServices();
 builder.Services.AddHttpContextAccessor();
 
 var tokenKey = Encoding.ASCII.GetBytes(

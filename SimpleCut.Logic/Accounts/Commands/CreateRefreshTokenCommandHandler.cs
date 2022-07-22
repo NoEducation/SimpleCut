@@ -59,7 +59,7 @@ namespace SimpleCut.Logic.Accounts.Commands
             {
                 @userid = refreshToken.UserId,
                 @token = refreshToken.Token,
-                @expiresdate = refreshToken.Token,
+                @expiresdate = refreshToken.ExpiresDate,
                 @createddate = refreshToken.CreatedDate
             };
 

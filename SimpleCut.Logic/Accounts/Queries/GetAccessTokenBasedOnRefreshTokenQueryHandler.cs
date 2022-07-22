@@ -2,7 +2,7 @@
 using SimpleCut.Common.Dtos;
 using SimpleCut.Infrastructure.Context;
 using SimpleCut.Infrastructure.Cqrs;
-using SimpleCut.Infrastructure.Services.Accounts;
+using SimpleCut.Services.Accounts;
 using System.Security.Claims;
 
 namespace SimpleCut.Logic.Accounts.Queries

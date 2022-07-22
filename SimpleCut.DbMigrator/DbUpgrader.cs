@@ -9,19 +9,19 @@ namespace SimpleCut.DbMigrator
     {
         public List<SqlScript> allExecutedScripts = new List<SqlScript>();
 
-        public DatabaseUpgradeResult UpgradeDatabase(string connectionString, string path, bool dropDatabase = false)
+        public DatabaseUpgradeResult UpgradeDatabase(string connectionString, bool dropDatabase = false)
         {
             if(dropDatabase)
                 DropDatabase(connectionString);
 
             EnsureDatabase.For.PostgresqlDatabase(connectionString);
 
-            DatabaseUpgradeResult upgradeResult = PerformUpgrade(connectionString, path);
+            DatabaseUpgradeResult upgradeResult = PerformUpgrade(connectionString);
 
             return new DatabaseUpgradeResult(allExecutedScripts, upgradeResult.Successful, upgradeResult.Error, upgradeResult.ErrorScript);
         }
 
-        private DatabaseUpgradeResult PerformUpgrade(string connectionString, string filesInPath)
+        private DatabaseUpgradeResult PerformUpgrade(string connectionString)
         {
             var builder = DeployChanges
                 .To
@@ -49,10 +49,10 @@ namespace SimpleCut.DbMigrator
             
             connection.Open();
 
-            using (var command = new NpgsqlCommand($"SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = \'{databaseName}\'; DROP DATABASE IF EXISTS \"{databaseName}\"", connection))
-            {
-                command.ExecuteNonQuery();
-            }
+            using var command =
+                new NpgsqlCommand($"SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = \'{databaseName}\'; DROP DATABASE IF EXISTS \"{databaseName}\"", connection);
+           
+            command.ExecuteNonQuery();
 
             connection.Close();
 

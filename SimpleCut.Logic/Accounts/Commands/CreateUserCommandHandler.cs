@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿
+using Dapper;
 using Microsoft.Extensions.Options;
 using SimpleCut.Common.Dtos;
 using SimpleCut.Common.Options;
@@ -6,7 +7,7 @@ using SimpleCut.Domain.Accounts.Consts;
 using SimpleCut.Domain.Accounts.Enums;
 using SimpleCut.Infrastructure.Context;
 using SimpleCut.Infrastructure.Cqrs;
-using SimpleCut.Infrastructure.Services.Accounts;
+using SimpleCut.Services.Accounts;
 
 namespace SimpleCut.Logic.Accounts.Commands
 {
@@ -32,6 +33,7 @@ namespace SimpleCut.Logic.Accounts.Commands
 
             if (!result.Success)
                 return result;
+
 
             var passwordHash = _passwordHasher.GenerateHash(request.Password, _tokenOptions.Salt);
 
@@ -61,17 +63,17 @@ namespace SimpleCut.Logic.Accounts.Commands
 		   	            THEN 1
                       ELSE 0
                   END IsEmailInUse,
-	              CASE WHEN EXISTS(SELECT 1 FROM public.Users U3 WHERE u3.name = @name)
+	              CASE WHEN EXISTS(SELECT 1 FROM public.Users U3 WHERE u3.login = @login)
 		   	            THEN 1
                       ELSE 0
                   END IsNameInUse;
-            ", new { @name = command.Name, @email = command.Email});
+            ", new { @login = command.Login, @email = command.Email});
 
             if (validation.IsEmailInUse)
                 result.AddError("Email jest już w użyciu", nameof(command.Email));
 
             if (validation.IsNameInUse)
-                result.AddError("Login jest już w użyciu", nameof(command.Name));
+                result.AddError("Login jest już w użyciu", nameof(command.Login));
         }
 
         private string SqlInsert => $@"
@@ -101,12 +103,13 @@ namespace SimpleCut.Logic.Accounts.Commands
 
             INSERT INTO public.userRoles(
                  userId,
-                roleId)
+                 roleId)
 			 WITH usersCTE(userId) AS (
 				SELECT CURRVAL(pg_get_serial_sequence('public.users','userid')) 
 			 )
-			 SELECT RoleId,
-				(select userId from usersCTE) userId
+			 SELECT 
+                (select userId from usersCTE) userId,
+                RoleId
 			 FROM public.Roles
 			 WHERE Name = '{Roles.Appointment}';
             

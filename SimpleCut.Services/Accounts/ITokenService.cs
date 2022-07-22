@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-namespace SimpleCut.Infrastructure.Services.Accounts
+namespace SimpleCut.Services.Accounts
 {
     public interface ITokenService
     {

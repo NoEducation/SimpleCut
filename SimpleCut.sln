@@ -42,6 +42,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCut.DbMigrator", "Sim
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCut.Resources", "SimpleCut.Resources\SimpleCut.Resources.csproj", "{E2035AAC-BFF8-4140-B334-2F40B9598E31}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCut.Services", "SimpleCut.Services\SimpleCut.Services.csproj", "{88A87E00-EB02-4CEF-806B-3BE32A06C8FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{E2035AAC-BFF8-4140-B334-2F40B9598E31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2035AAC-BFF8-4140-B334-2F40B9598E31}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2035AAC-BFF8-4140-B334-2F40B9598E31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88A87E00-EB02-4CEF-806B-3BE32A06C8FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88A87E00-EB02-4CEF-806B-3BE32A06C8FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88A87E00-EB02-4CEF-806B-3BE32A06C8FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88A87E00-EB02-4CEF-806B-3BE32A06C8FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,7 +5,7 @@ using SimpleCut.Common.Options;
 using SimpleCut.Domain.Accounts;
 using SimpleCut.Infrastructure.Context;
 using SimpleCut.Infrastructure.Cqrs;
-using SimpleCut.Infrastructure.Services.Accounts;
+using SimpleCut.Services.Accounts;
 using SimpleCut.Resources;
 using System.Security.Claims;
 
@@ -56,7 +56,7 @@ namespace SimpleCut.Logic.Accounts.Queries
             };
         }
 
-        public async Task<User> Validate(GetAccountTokenQuery command, OperationResult result)
+        public async Task<User> Validate(GetAccountTokenQuery query, OperationResult result)
         {
             var user = await _context.Connection.QuerySingleAsync<User>(@"
     SELECT userid, 
@@ -76,19 +76,19 @@ namespace SimpleCut.Logic.Accounts.Queries
         modifiedbyuserid
     FROM public.users
     WHERE login = @login or email = @login;
-            ", new { @login = command.Login });
+            ", new { @login = query.Login });
 
             if (user is null)
             {
-                result.AddError(AccountResources.UserDoesNotExistsErrorMessage);
+                result.AddError(AccountResources.UserDoesNotExistsErrorMessage, nameof(query.Login));
                 return user;
             }
 
-            var passwordHash = _passwordHasherService.GenerateHash(user.Password, _tokenOptions.Salt);
+            var passwordMathHash = _passwordHasherService.CompareHashWithPassword(user.Password, query.Password, _tokenOptions.Salt);
 
-            if (passwordHash != user.Password)
+            if (!passwordMathHash)
             {
-                result.AddError(AccountResources.UserDoesNotExistsErrorMessage);
+                result.AddError("Hasło jest niepoprawne", nameof(query.Password));
             }
 
             return user;

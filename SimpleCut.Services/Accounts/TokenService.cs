@@ -6,7 +6,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace SimpleCut.Infrastructure.Services.Accounts
+namespace SimpleCut.Services.Accounts
 {
     public class TokenService : ITokenService
     {

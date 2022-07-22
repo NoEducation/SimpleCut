@@ -1,8 +1,8 @@
 ﻿namespace SimpleCut.Common.Exceptions
 {
-    public class SimpleCutValidationExpection : Exception
+    public class SimpleCutValidationException : Exception
     {
-        public SimpleCutValidationExpection(string message) : base(message)
+        public SimpleCutValidationException(string message) : base(message)
         {}
     }
 }
