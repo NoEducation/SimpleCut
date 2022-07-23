@@ -10,13 +10,13 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IDbContext>(
     x => new DbContext(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddCqrs();
+builder.Services.AddCqrsModule();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddOptions(builder.Configuration);
-builder.Services.AddServices();
+builder.Services.AddOptionsModule(builder.Configuration);
+builder.Services.AddServicesModule();
 builder.Services.AddHttpContextAccessor();
 
 var tokenKey = Encoding.ASCII.GetBytes(

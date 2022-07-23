@@ -15,14 +15,11 @@ namespace SimpleCut.Logic.Accounts.Commands
     {
         private readonly IDbContext _dbContext;
         private readonly IPasswordHasherService _passwordHasher;
-        private readonly TokenOptions _tokenOptions;
         public CreateUserCommandHandler(IDbContext dbContext,
-            IPasswordHasherService passwordHasher,
-            IOptions<TokenOptions> tokenOptions)
+            IPasswordHasherService passwordHasher)
         {
             _dbContext = dbContext;
             _passwordHasher = passwordHasher;
-            _tokenOptions = tokenOptions.Value;
         }
 
         public async Task<OperationResult> Handle(CreateUserCommand request, CancellationToken cancellationToken)
@@ -35,7 +32,7 @@ namespace SimpleCut.Logic.Accounts.Commands
                 return result;
 
 
-            var passwordHash = _passwordHasher.GenerateHash(request.Password, _tokenOptions.Salt);
+            var passwordHash = _passwordHasher.GenerateHash(request.Password);
 
             var parameters = new
             {

@@ -14,16 +14,13 @@ namespace SimpleCut.Logic.Accounts.Queries
     public class GetAccountTokenQueryHandler : IQueryHandler<GetAccountTokenQuery, GetAccountTokenQueryResponse>
     {
         private readonly IDbContext _context;
-        private readonly TokenOptions _tokenOptions;
         private readonly ITokenService _tokenService;
         private readonly IPasswordHasherService _passwordHasherService;
         public GetAccountTokenQueryHandler(IDbContext context,
-            IOptions<TokenOptions> options,
             ITokenService tokenService,
             IPasswordHasherService passwordHasherService)
         {
             _context = context;
-            _tokenOptions = options.Value;
             _tokenService = tokenService;
             _passwordHasherService = passwordHasherService;
         }
@@ -84,7 +81,7 @@ namespace SimpleCut.Logic.Accounts.Queries
                 return user;
             }
 
-            var passwordMathHash = _passwordHasherService.CompareHashWithPassword(user.Password, query.Password, _tokenOptions.Salt);
+            var passwordMathHash = _passwordHasherService.CompareHashWithPassword(user.Password, query.Password);
 
             if (!passwordMathHash)
             {

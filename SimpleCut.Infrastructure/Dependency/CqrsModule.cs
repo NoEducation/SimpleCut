@@ -9,7 +9,7 @@ namespace SimpleCut.Infrastructure.Dependency
 {
     public static class CqrsModule
     {
-        public static IServiceCollection AddCqrs(this IServiceCollection services)
+        public static IServiceCollection AddCqrsModule(this IServiceCollection services)
         {
             services.AddMediatR( Assembly.Load("SimpleCut.Logic"));
             services.AddTransient<IDispatcher, Dispatcher>();

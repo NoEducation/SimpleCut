@@ -6,7 +6,7 @@ namespace SimpleCut.Infrastructure.Dependency
 {
     public static class OptionsModule
     {
-        public static IServiceCollection AddOptions(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddOptionsModule(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<TokenOptions>(configuration.GetSection(TokenOptions.Position));
 

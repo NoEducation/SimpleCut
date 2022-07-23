@@ -2,7 +2,7 @@
 {
     public interface IPasswordHasherService
     {
-        public string GenerateHash(string password, string salt);
-        public bool CompareHashWithPassword(string passwordHash, string password, string salt);
+        public string GenerateHash(string password);
+        public bool CompareHashWithPassword(string passwordHash, string password);
     }
 }

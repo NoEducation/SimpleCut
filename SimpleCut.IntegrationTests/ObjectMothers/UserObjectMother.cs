@@ -3,12 +3,14 @@ using SimpleCut.Domain.Accounts;
 using SimpleCut.Domain.Accounts.Consts;
 using SimpleCut.Domain.Accounts.Enums;
 using SimpleCut.Infrastructure.Context;
+using SimpleCut.Services.Accounts;
 
 namespace SimpleCut.IntegrationTests.ObjectMothers
 {
     public class UserObjectMother
     {
         public static async Task<User> CreateUserAsync(IDbContext context,
+            IPasswordHasherService hasher,
             string role = Roles.Appointment,
             string login = "Test",
             string email = "test@test.pl",
@@ -62,29 +64,28 @@ namespace SimpleCut.IntegrationTests.ObjectMothers
         @descipiton,
         @addedDate);
 
-        SELECT CURRVAL(pg_get_serial_sequence('public.users','userid');
-", ToSqlParameters(user));
+        SELECT CURRVAL(pg_get_serial_sequence('public.users','userid'));
+", ToSqlParameters(user, hasher));
 
             user.UserId = userId;
 
             await context.Connection.ExecuteAsync($@"
             INSERT INTO public.userroles(userid, roleid, addeddate)
-	        VALUES (userId,
-    	        SELECT 
-                    RoleId
-			    FROM public.Roles
-			    WHERE Name = '{Roles.Appointment}',    
-            now());", new { userId = userId});
+	        SELECT  @userId,
+                    RoleId,
+                    now()
+			FROM public.Roles
+			WHERE Name = '{role}';", new { @userId = userId});
 
             return user;
         }
-        private static object ToSqlParameters(User user)
+        private static object ToSqlParameters(User user, IPasswordHasherService hasher)
         {
             var result = new
             {
                 @login = user.Login,
                 @email = user.Email,
-                @password = user.Password,
+                @password = hasher.GenerateHash(user.Password),
                 @isActive = user.IsActive,
                 @isConfirmed = user.IsConfirmed,
                 @name = user.Name,

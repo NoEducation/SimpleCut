@@ -17,6 +17,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCut.Worker", "SimpleC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCut.IntegrationTests", "SimpleCut.IntegrationTests\SimpleCut.IntegrationTests.csproj", "{FCCC39C5-372F-443F-9307-21CC4289F58C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCut.DbMigrator", "SimpleCut.DbMigrator\SimpleCut.DbMigrator.csproj", "{E61C221F-7E3F-4207-8263-741B66B80795}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCut.Resources", "SimpleCut.Resources\SimpleCut.Resources.csproj", "{E2035AAC-BFF8-4140-B334-2F40B9598E31}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCut.Services", "SimpleCut.Services\SimpleCut.Services.csproj", "{88A87E00-EB02-4CEF-806B-3BE32A06C8FF}"
+EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SimpleCut.Frontend", "SimpleCut.Frontend\", "{DDDF27AF-6846-47F3-8A9F-10752034C54C}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
@@ -35,14 +41,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SimpleCut.Frontend", "Simpl
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "52152"
-		SlnRelativePath = "SimpleCut.Frontend\"
 	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCut.DbMigrator", "SimpleCut.DbMigrator\SimpleCut.DbMigrator.csproj", "{E61C221F-7E3F-4207-8263-741B66B80795}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCut.Resources", "SimpleCut.Resources\SimpleCut.Resources.csproj", "{E2035AAC-BFF8-4140-B334-2F40B9598E31}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCut.Services", "SimpleCut.Services\SimpleCut.Services.csproj", "{88A87E00-EB02-4CEF-806B-3BE32A06C8FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,9 +77,6 @@ Global
 		{FCCC39C5-372F-443F-9307-21CC4289F58C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCCC39C5-372F-443F-9307-21CC4289F58C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCCC39C5-372F-443F-9307-21CC4289F58C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DDDF27AF-6846-47F3-8A9F-10752034C54C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DDDF27AF-6846-47F3-8A9F-10752034C54C}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{DDDF27AF-6846-47F3-8A9F-10752034C54C}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{E61C221F-7E3F-4207-8263-741B66B80795}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E61C221F-7E3F-4207-8263-741B66B80795}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E61C221F-7E3F-4207-8263-741B66B80795}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -93,6 +89,10 @@ Global
 		{88A87E00-EB02-4CEF-806B-3BE32A06C8FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88A87E00-EB02-4CEF-806B-3BE32A06C8FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88A87E00-EB02-4CEF-806B-3BE32A06C8FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDDF27AF-6846-47F3-8A9F-10752034C54C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDDF27AF-6846-47F3-8A9F-10752034C54C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDDF27AF-6846-47F3-8A9F-10752034C54C}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDDF27AF-6846-47F3-8A9F-10752034C54C}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

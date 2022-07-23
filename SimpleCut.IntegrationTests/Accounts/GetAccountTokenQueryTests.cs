@@ -7,9 +7,9 @@ namespace SimpleCut.IntegrationTests.Accounts
     public class GetAccountTokenQueryTests : IntegrationTestBase
     {
         [Test]
-        public async Task ValidRequest_UserExists_CorrectTokenReturned()
+        public async Task ValidRequest_UserExists_AccessTokenIsReturned()
         {
-            var user = await UserObjectMother.CreateUserAsync(this.Context);
+            var user = await UserObjectMother.CreateUserAsync(this.Context, Hasher);
 
             var query  = new GetAccountTokenQuery()
             {
@@ -25,12 +25,6 @@ namespace SimpleCut.IntegrationTests.Accounts
             Assert.That(result.Result.UserId, Is.EqualTo(user.UserId));
             Assert.IsNotNull(result.Result.AccessToken);
             Assert.IsNotNull(result.Result.RefreshToken);
-        }
-
-        [Test]
-        public void EmptyTest()
-        {
-
         }
     }
 }

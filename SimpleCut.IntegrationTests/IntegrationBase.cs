@@ -8,6 +8,8 @@ using SimpleCut.DbMigrator;
 using SimpleCut.Infrastructure.Context;
 using SimpleCut.Infrastructure.Cqrs;
 using SimpleCut.Infrastructure.Dependency;
+using SimpleCut.Services.Accounts;
+
 namespace SimpleCut.IntegrationTests
 {
     public class IntegrationTestBase
@@ -17,6 +19,9 @@ namespace SimpleCut.IntegrationTests
         protected IDbContext Context { get; private set; }
         protected IDispatcher Dispatcher { get; private set; }
 
+        protected IPasswordHasherService Hasher { get; private set; }
+
+        //TODO.DA jeżeli za każdym razem bede tworzym baze od nowa, drop nie jest to pobrzebne 
         private static Checkpoint _checkpoint;
         private string _connectionString;
 
@@ -34,9 +39,9 @@ namespace SimpleCut.IntegrationTests
             ServiceProvider = new ServiceCollection()
                 .AddScoped<IDbContext>(
                      x => new DbContext(_connectionString))
-                .AddCqrs()
-                .AddServices()
-                .AddOptions()
+                .AddCqrsModule()
+                .AddServicesModule()
+                .AddOptionsModule(Configuration)
                 .BuildServiceProvider();
 
             UpgradeDatabase();
@@ -47,10 +52,10 @@ namespace SimpleCut.IntegrationTests
         {
             Context = ServiceProvider.GetService<IDbContext>();
             Dispatcher = ServiceProvider.GetService<IDispatcher>();
+            Hasher = ServiceProvider.GetService<IPasswordHasherService>();
 
             _checkpoint = new Checkpoint
             {
-                //TablesToIgnore = new string[] { "schemaversions" },
                 TablesToIgnore = new Table[]
                 {
                     new Table("schemaversions")
@@ -77,7 +82,9 @@ namespace SimpleCut.IntegrationTests
         {
             var migrator = new DbUpgrader();
 
-            var result = migrator.UpgradeDatabase(_connectionString, false);
+            var dropDatabase = Configuration.GetValue<bool>("Database:DropDatabaseEachTests");
+
+            var result = migrator.UpgradeDatabase(_connectionString, dropDatabase);
 
             if (!result.Successful)
                 throw new SimpleCutExecutionException(result.Error.Message);
@@ -87,8 +94,6 @@ namespace SimpleCut.IntegrationTests
         {
             await Context.Connection.OpenAsync();
 
-            //TODO.DA command psql -U postgres -d lportal -c "GRANT ALL PRIVILEGES ON TABLE pg_catalog.pg_largeobject TO postgres;"
-            // should be executed
             await _checkpoint.Reset(Context.Connection);
 
             await Context.Connection.CloseAsync();
